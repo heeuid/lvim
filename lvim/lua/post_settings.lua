@@ -1,0 +1,6 @@
+require("settings.common").setup()
+require("settings.which_key").setup()
+require("settings.lsp").setup()
+require("settings.linux").setup()
+require("settings.rust").setup()
+require("settings.flutter").setup()
