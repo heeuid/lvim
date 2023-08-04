@@ -26,7 +26,7 @@ elif [ "$1" = "config" ]; then
     else
         git clone https://github.com/heeuid/lvim
         cd lvim
-        mv lvim ~/.config/lvim
+        mv lvim ~/.config
         cd -
         rm -rf lvim
     fi
