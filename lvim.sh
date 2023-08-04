@@ -14,19 +14,22 @@ if [ "$1" = "build" ]; then
     # For lunarvim configuration
     LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 elif [ "$1" = "config" ]; then
-    if [ -f "~/.config/lvim" ]; then
-        mv ~/.config/lvim ~/.config/lvim.old
+    if [ -d "$HOME/.config/lvim" ]; then
+        if [ -d "$HOME/.config/lvim.old" ]; then
+            rm -rf $HOME/.config/lvim.old
+        fi
+        mv $HOME/.config/lvim $HOME/.config/lvim.old
     fi
 
     if [ -d "lvim" ]; then
-        mv lvim ~/.config
+        cp -r lvim $HOME/.config
     elif [ -f "lvim.tar.xz" ]; then
         tar -xf lvim.tar.xz
-        mv lvim ~/.config
+        mv lvim $HOME/.config
     else
         git clone https://github.com/heeuid/lvim
         cd lvim
-        mv lvim ~/.config
+        mv lvim $HOME/.config
         cd -
         rm -rf lvim
     fi
