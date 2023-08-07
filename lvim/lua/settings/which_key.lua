@@ -1,5 +1,6 @@
 local M = {}
 
+-- options
 local opts = {
     nmode = {
         space = {
@@ -21,6 +22,41 @@ local opts = {
     },
     vmode = {}
 }
+
+-- cscope setting
+local cscope_sym_map = {
+    s = "Find this symbol",
+    g = "Find this global defination",
+    c = "Find functions calling this function",
+    t = "Find this text string",
+    e = "Find this egrep pattern",
+    f = "Find this file",
+    i = "Find files #including this file",
+    d = "Find functions called by this function",
+    a = "Find places where this symbol is assigned a value",
+    b = "Build database",
+}
+
+local get_cscope_prompt_cmd = function(operation, selection)
+    local sel = "cword" -- word under cursor
+    if selection == "f" then -- file under cursor
+        sel = "cfile"
+    end
+
+    return string.format(
+        [[<cmd>lua require('cscope_maps').cscope_prompt('%s', vim.fn.expand("<%s>"))<cr>]],
+        operation,
+        sel
+    )
+end
+
+local cscope_cmd_opt = function(operation, selection)
+    local ret = {
+        get_cscope_prompt_cmd(operation, selection),
+        cscope_sym_map[operation]
+    }
+    return ret
+end
 
 function M.setup()
     local ok, wk = pcall(require, "which-key")
@@ -61,6 +97,19 @@ function M.setup()
         wk.register({ -- for "\\[0-9a-zA-Z]+"
             t = { "<cmd>Tagbar<cr>", "Tagbar" },
             e = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
+            c = {
+                name = "Cscope",
+                s = cscope_cmd_opt("s", "w"),
+                g = cscope_cmd_opt("g", "w"),
+                c = cscope_cmd_opt("c", "w"),
+                t = cscope_cmd_opt("t", "w"),
+                e = cscope_cmd_opt("e", "w"),
+                f = cscope_cmd_opt("f", "f"),
+                i = cscope_cmd_opt("i", "f"),
+                d = cscope_cmd_opt("d", "w"),
+                a = cscope_cmd_opt("a", "w"),
+                b = {"<cmd>Cscope build<cr>", cscope_sym_map.b },
+            },
             b = {
                 name = "Buffers",
                 j = { "<cmd>BufferLinePick<cr>", "Jump" },
