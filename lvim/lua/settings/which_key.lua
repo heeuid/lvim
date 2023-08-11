@@ -3,6 +3,14 @@ local M = {}
 -- options
 local opts = {
     nmode = {
+        empty = {
+            mode = "n",     -- NORMAL mode
+            prefix = "",
+            buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+            silent = true,  -- use `silent` when creating keymaps
+            noremap = true, -- use `noremap` when creating keymaps
+            nowait = true,  -- use `nowait` when creating keymaps
+        },
         space = {
             mode = "n",     -- NORMAL mode
             prefix = "<space>",
@@ -68,6 +76,16 @@ function M.setup()
 
         lvim.builtin.which_key.mappings = {}
         vim.o.timeoutlen = 80
+
+        wk.register({
+            ["<tab>"] = {"<cmd>bn<cr>", "Buffer: Next"},
+            ["<S-tab>"] = {"<cmd>bp<cr>", "Buffer: Previous"},
+            ["_"] = {"<cmd>res -1<cr>", "Resize: -Width"},
+            ["+"] = {"<cmd>res +1<cr>", "Resize: +Width"},
+            ["-"] = {"<esc><c-w><", "Resize: -Height"},
+            ["="] = {"<esc><c-w>>", "REsize: +Height"},
+            ["<F9>"] = {"<cmd>qa!<cr>", "Quit All"},
+        })
 
         wk.register({ -- for "<sapce>[0-9a-zA-Z]+"
             [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
