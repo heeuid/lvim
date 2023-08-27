@@ -28,7 +28,32 @@ local opts = {
             nowait = true,  -- use `nowait` when creating keymaps
         }
     },
-    vmode = {}
+    xmode = { -- only visual
+        empty = {
+            mode = "x",     -- NORMAL mode
+            prefix = "",
+            buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+            silent = true,  -- use `silent` when creating keymaps
+            noremap = true, -- use `noremap` when creating keymaps
+            nowait = true,  -- use `nowait` when creating keymaps
+        },
+        space = {
+            mode = "x",     -- NORMAL mode
+            prefix = "<space>",
+            buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+            silent = true,  -- use `silent` when creating keymaps
+            noremap = true, -- use `noremap` when creating keymaps
+            nowait = true,  -- use `nowait` when creating keymaps
+        },
+        backslash = {
+            mode = "x",     -- NORMAL mode
+            prefix = "\\",
+            buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+            silent = true,  -- use `silent` when creating keymaps
+            noremap = true, -- use `noremap` when creating keymaps
+            nowait = true,  -- use `nowait` when creating keymaps
+        }
+    }
 }
 
 -- cscope setting
@@ -66,6 +91,7 @@ local cscope_cmd_opt = function(operation, selection)
     return ret
 end
 
+
 function M.setup()
     local ok, wk = pcall(require, "which-key")
     if ok then
@@ -78,6 +104,10 @@ function M.setup()
         vim.o.timeoutlen = 80
 
         wk.register({
+            ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
+        }, opts.xmode.space)
+
+        wk.register({
             ["<tab>"] = {"<cmd>bn<cr>", "Buffer: Next"},
             ["<S-tab>"] = {"<cmd>bp<cr>", "Buffer: Previous"},
             ["_"] = {"<cmd>res -1<cr>", "Resize: -Width"},
@@ -85,11 +115,18 @@ function M.setup()
             ["-"] = {"<esc><c-w><", "Resize: -Height"},
             ["="] = {"<esc><c-w>>", "REsize: +Height"},
             ["<F9>"] = {"<cmd>qa!<cr>", "Quit All"},
-        })
+            g = {
+                ["R"] = { "<cmd>Glance reference<cr>", "Glance Reference"},
+                ["D"] = { "<cmd>Glance definitions<cr>", "Glance Definition"},
+                ["Y"] = { "<cmd>Glance type_definition<cr>", "Glance tYpe_def"},
+                ["M"] = { "<cmd>Glance implementations<cr>", "Glance iMplementation"},
+            },
+        }, opts.nmode.empty)
 
         wk.register({ -- for "<sapce>[0-9a-zA-Z]+"
             [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
             ["w"] = { "<cmd>w!<CR>", "Save" },
+            ["W"] = { "<cmd>Workspace LeftPanelToggle<cr>", "Toggle nvim-ide left pannel" },
             ["q"] = { "<cmd>confirm q<CR>", "Quit" },
             ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
             ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
@@ -312,6 +349,14 @@ function M.setup()
             T = {
                 name = "Treesitter",
                 i = { ":TSConfigInfo<cr>", "Info" },
+            },
+            W = {
+                name = "nvim-ide",
+                w = { "<cmd>Workspace<cr>", "Show/Select Commands" },
+                l = { "<cmd>Workspace LeftPanelToggle<cr>", "Toggles Left Panels"},
+                r = { "<cmd>Workspace RightPanelToggle<cr>", "Toggles Right Panels"},
+                g = { "<cmd>Workspace OpenLog<cr>", "Open Log"},
+                R = { "<cmd>Workspace Reset<cr>", "Reset(Resize) All Pannels"},
             },
         }, opts.nmode.backslash)
     end
