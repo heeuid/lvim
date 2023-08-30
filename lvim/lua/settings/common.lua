@@ -7,6 +7,11 @@ function M.setup()
     lvim.builtin.terminal.execs[2][2] = "<space>2"
     lvim.builtin.terminal.execs[3][2] = "<space>3"
 
+    -- require("shade").setup({
+    --     overlay_opacity = 50,
+    --     opacity_setup = 1,
+    -- })
+
     -- local ok, wk = pcall(require, "which-key")
     -- if ok then
     --     wk.register({["<space>f"] = {name="+telescope"}}, { noremap = true, silent = true })

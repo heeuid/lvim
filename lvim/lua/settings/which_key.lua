@@ -91,7 +91,6 @@ local cscope_cmd_opt = function(operation, selection)
     return ret
 end
 
-
 function M.setup()
     local ok, wk = pcall(require, "which-key")
     if ok then
@@ -350,14 +349,14 @@ function M.setup()
                 name = "Treesitter",
                 i = { ":TSConfigInfo<cr>", "Info" },
             },
-            W = {
-                name = "nvim-ide",
-                w = { "<cmd>Workspace<cr>", "Show/Select Commands" },
-                l = { "<cmd>Workspace LeftPanelToggle<cr>", "Toggles Left Panels"},
-                r = { "<cmd>Workspace RightPanelToggle<cr>", "Toggles Right Panels"},
-                g = { "<cmd>Workspace OpenLog<cr>", "Open Log"},
-                R = { "<cmd>Workspace Reset<cr>", "Reset(Resize) All Pannels"},
-            },
+            -- W = {
+            --     name = "nvim-ide",
+            --     w = { "<cmd>Workspace<cr>", "Show/Select Commands" },
+            --     l = { "<cmd>Workspace LeftPanelToggle<cr>", "Toggles Left Panels"},
+            --     r = { "<cmd>Workspace RightPanelToggle<cr>", "Toggles Right Panels"},
+            --     g = { "<cmd>Workspace OpenLog<cr>", "Open Log"},
+            --     R = { "<cmd>Workspace Reset<cr>", "Reset(Resize) All Pannels"},
+            -- },
         }, opts.nmode.backslash)
     end
 end

@@ -8,7 +8,10 @@ return {
     { "dnlhc/glance.nvim",
         config = function() require("glance").setup({}) end,
     },
-    { "ldelossa/nvim-ide",
-        config = function() require("ide").setup({}) end,
-    },
+    -- { "ldelossa/nvim-ide",
+    --     config = function() require("ide").setup({}) end,
+    -- },
+    -- {
+    --     "sunjon/shade.nvim"
+    -- }
 }
