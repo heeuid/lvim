@@ -189,6 +189,7 @@ function M.setup()
                     "<cmd>BufferLineSortByExtension<cr>",
                     "Sort by language",
                 },
+                c = { "<cmd>BufferKill<CR>", "Close Buffer" },
             },
             d = {
                 name = "Debug",
