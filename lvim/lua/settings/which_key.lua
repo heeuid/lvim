@@ -99,6 +99,10 @@ function M.setup()
         -- Terminal keymaps to open terminal are written 
         -- in ~/.config/lvim/lua/settings/common.lua
 
+        -- default keymapping:
+        --     ~/.local/share/lunarvim/lvim/lua/lvim/keymappings.lua
+        --     indentation, quick fix toggle, resize windows, ...
+
         lvim.builtin.which_key.mappings = {}
         vim.o.timeoutlen = 80
 
@@ -146,6 +150,8 @@ function M.setup()
             ["v"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
             ["8"] = { "<cmd>f<cr>", "Current File Path" },
             ["9"] = { "<cmd>pwd<cr>", "Current Dir Path" },
+            ["d"] = { "<cmd>lua vim.cmd('Cscope find g ' .. vim.fn.expand('<cword>'))<cr>", "Cscope Global Def. List" },
+            ["s"] = { "<cmd>lua vim.cmd('ts ' .. vim.fn.expand('<cword>'))<cr>", "Tag Select Current Word" },
         }, opts.nmode.space)
 
         wk.register({ -- for "\\[0-9a-zA-Z]+"
