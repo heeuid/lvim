@@ -11,6 +11,8 @@ if [ "$1" = "build" ]; then
     cd -
     rm -rf neovim
 
+    echo "Successful Build & Instal!"
+
     # For lunarvim configuration
     LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 elif [ "$1" = "config" ]; then
@@ -33,4 +35,6 @@ elif [ "$1" = "config" ]; then
         cd -
         rm -rf lvim
     fi
+
+    echo "Successful Configuration!"
 fi
