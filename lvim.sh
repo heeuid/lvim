@@ -37,4 +37,8 @@ elif [ "$1" = "config" ]; then
     fi
 
     echo "Successful Configuration!"
+else
+    echo "USAGE: $0 [build|config]"
+    echo "- build : build neovim and install lunarvim"
+    echo "- config: set user-configs for lunarvim (~/.config/lvim)"
 fi
