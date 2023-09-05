@@ -7,6 +7,14 @@ function M.setup()
     lvim.builtin.terminal.execs[2][2] = "<space>2"
     lvim.builtin.terminal.execs[3][2] = "<space>3"
 
+    local cmp = require("cmp")
+    cmp.setup.cmdline('/', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'buffer' }
+      }
+    })
+
     -- require("shade").setup({
     --     overlay_opacity = 50,
     --     opacity_setup = 1,
