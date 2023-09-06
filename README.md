@@ -2,20 +2,25 @@
 my lunarvim setting
 
 ## Structure
-- lvim
-    + ~/.config/lvim
+- lvim/
+    + A directory including user-defined config. files for lunarvim
 - lvim.sh
-    + lvim.sh build
-    + lvim.sh config
+    + A script for building/install nvim/lvim and setting configs 
+        + lvim.sh build
+        + lvim.sh config
 
 ## Usage
 1. install neovim & lunarvim
-    + lvim.sh build 
+    + <b>`lvim.sh build`</b> for <b>ubuntu</b>
 2. configure lvim
-    + lvim.sh config
+    + <b>`lvim.sh config`</b> for <b>ubuntu</b> 
 3. open lunarvim
-    + lvim
+    + <b>`lvim [file]`</b> 
 4. key bindings
-    + open lvim/lua/settings/which_key.lua
-    + "<space>[word]"
-    + or "\[words]"
+    + check with lvim/lua/settings/which_key.lua
+    + In lvim, press a key.  
+      If it is registered, 
+      then you'll be able to see the list of shortcut keys that start with it.
+
+## Error
+- If icons are broken, then install nerd-font and change terminal font into it.
