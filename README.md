@@ -24,3 +24,11 @@ my lunarvim setting
 
 ## Error
 - If icons are broken, then install nerd-font and change terminal font into it.
+
+# vim
+
+Neovim has lots of plugins and is slower than vim. When you open large files  
+whose size is thousands MB, it may open slowly. So in that case, use vim.
+
+1. <b>`./vim.sh build`</b> for plug.vim
+2. <b>`./vim.sh config`</b>
