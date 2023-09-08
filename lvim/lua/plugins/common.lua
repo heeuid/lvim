@@ -8,7 +8,6 @@ return {
     { "dnlhc/glance.nvim",
         config = function() require("glance").setup({}) end,
     },
-    { "hrsh7th/cmp-cmdline" },
     -- { "ldelossa/nvim-ide",
     --     config = function() require("ide").setup({}) end,
     -- },
