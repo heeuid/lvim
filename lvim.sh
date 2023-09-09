@@ -10,17 +10,21 @@ if [ "$1" = "build" ]; then
     sudo make install
     cd -
     rm -rf neovim
+    
+    echo "Build neovim successfully!"
 
     # For lunarvim configuration
     LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
-    echo "Successful Build & Install!"
+    echo "Install lunarvim successfully!"
 elif [ "$1" = "config" ]; then
     if [ -d "$HOME/.config/lvim" ]; then
         if [ -d "$HOME/.config/lvim.old" ]; then
             rm -rf $HOME/.config/lvim.old
+            echo "- delete ~/.config/lvim.old"
         fi
         mv $HOME/.config/lvim $HOME/.config/lvim.old
+        echo "- backup previous ~/.config/lvim as ~/.config/lvim.old"
     fi
 
     if [ -d "lvim" ]; then
@@ -35,7 +39,8 @@ elif [ "$1" = "config" ]; then
         cd -
         rm -rf lvim
     fi
-
+    
+    echo "- create new ~/.config/lvim"
     echo "Successful Configuration!"
 else
     echo "USAGE: $0 [build|config]"
