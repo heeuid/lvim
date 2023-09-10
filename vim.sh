@@ -15,5 +15,5 @@ elif [ "$1" = "config" ]; then
 else
     echo "USAGE: $0 [build|config]"
     echo "- build : install plug.vim for vim plugins"
-    echo "- config: set .vimrc
+    echo "- config: set .vimrc"
 fi
