@@ -9,6 +9,16 @@ function M.setup()
 
     lvim.builtin.cmp.cmdline.enable = true
 
+    lvim.colorscheme = "catppuccin-latte"
+    --    "catppuccin-latte"
+    --    "catppuccin-frappe"
+    --    "catppuccin-macchiato"
+    --    "catppuccin-mocha"
+    --lvim.colorscheme = "tokyonight-day"
+    --    "tokyonight-storm"
+    --    "tokyonight-night"
+    --    "tokyonight-moon"
+
     -- require("shade").setup({
     --     overlay_opacity = 50,
     --     opacity_setup = 1,
