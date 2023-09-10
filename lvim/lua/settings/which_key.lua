@@ -28,7 +28,7 @@ local opts = {
             nowait = true,  -- use `nowait` when creating keymaps
         }
     },
-    xmode = { -- only visual
+    xmode = {               -- only visual
         empty = {
             mode = "x",     -- NORMAL mode
             prefix = "",
@@ -71,7 +71,7 @@ local cscope_sym_map = {
 }
 
 local get_cscope_prompt_cmd = function(operation, selection)
-    local sel = "cword" -- word under cursor
+    local sel = "cword"      -- word under cursor
     if selection == "f" then -- file under cursor
         sel = "cfile"
     end
@@ -91,17 +91,48 @@ local cscope_cmd_opt = function(operation, selection)
     return ret
 end
 
+local diagnostic = function()
+    local float = vim.diagnostic.config().float
+    if float then
+        local config = type(float) == "table" and float or {}
+        config.scope = "line"
+        vim.diagnostic.open_float(config)
+    end
+end
+
 function M.setup()
     local ok, wk = pcall(require, "which-key")
     if ok then
-        -- Original keymaps for lunarvim are written 
+        -- original which-key mapping:
         -- in ~/.local/share/lunarvim/lvim/lua/core/which-key.lua
-        -- Terminal keymaps to open terminal are written 
-        -- in ~/.config/lvim/lua/settings/common.lua
+
+        -- terminal keymaps:
+        --     to open terminal are written
+        --     in ~/.config/lvim/lua/settings/common.lua
 
         -- default keymapping:
         --     ~/.local/share/lunarvim/lvim/lua/lvim/keymappings.lua
         --     indentation, quick fix toggle, resize windows, ...
+
+        -- lsp keymapping:
+        --     in  ~/.local/share/lunarvim/lvim/lua/lvim/lsp/config.lua
+        --     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover" },
+        --     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto definition" },
+        --     ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto Declaration" },
+        --     ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "Goto references" },
+        --     ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
+        --     ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help" },
+        --     ["gl"] = {
+        --       function()
+        --         local float = vim.diagnostic.config().float
+        --         if float then
+        --           local config = type(float) == "table" and float or {}
+        --           config.scope = "line"
+        --           vim.diagnostic.open_float(config)
+        --         end
+        --       end,
+        --       "Show line diagnostics",
+        --     },
 
         lvim.builtin.which_key.mappings = {}
         vim.o.timeoutlen = 80
@@ -111,18 +142,21 @@ function M.setup()
         }, opts.xmode.space)
 
         wk.register({
-            ["<tab>"] = {"<cmd>bn<cr>", "Buffer: Next"},
-            ["<S-tab>"] = {"<cmd>bp<cr>", "Buffer: Previous"},
-            ["_"] = {"<cmd>res -1<cr>", "Resize: -Width"},
-            ["+"] = {"<cmd>res +1<cr>", "Resize: +Width"},
-            ["-"] = {"<esc><c-w><", "Resize: -Height"},
-            ["="] = {"<esc><c-w>>", "REsize: +Height"},
-            ["<F9>"] = {"<cmd>qa!<cr>", "Quit All"},
+            ["<tab>"] = { "<cmd>bn<cr>", "Buffer: Next" },
+            ["<S-tab>"] = { "<cmd>bp<cr>", "Buffer: Previous" },
+            ["_"] = { "<cmd>res -1<cr>", "Resize: -Width" },
+            ["+"] = { "<cmd>res +1<cr>", "Resize: +Width" },
+            ["-"] = { "<esc><c-w><", "Resize: -Height" },
+            ["="] = { "<esc><c-w>>", "REsize: +Height" },
+            ["<F9>"] = { "<cmd>qa!<cr>", "Quit All" },
+            ["K"] = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover" },
             g = {
-                ["R"] = { "<cmd>Glance reference<cr>", "Glance Reference"},
-                ["D"] = { "<cmd>Glance definitions<cr>", "Glance Definition"},
-                ["Y"] = { "<cmd>Glance type_definition<cr>", "Glance tYpe_def"},
-                ["M"] = { "<cmd>Glance implementations<cr>", "Glance iMplementation"},
+                ["d"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto definition" },
+                ["D"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto Declaration" },
+                ["r"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "Goto references" },
+                ["I"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
+                ["s"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help" },
+                ["l"] = { diagnostic, "Show line diagnostics" },
             },
         }, opts.nmode.empty)
 
@@ -168,7 +202,7 @@ function M.setup()
                 i = cscope_cmd_opt("i", "f"),
                 d = cscope_cmd_opt("d", "w"),
                 a = cscope_cmd_opt("a", "w"),
-                b = {"<cmd>Cscope build<cr>", cscope_sym_map.b },
+                b = { "<cmd>Cscope build<cr>", cscope_sym_map.b },
             },
             b = {
                 name = "Buffers",
