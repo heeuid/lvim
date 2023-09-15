@@ -2,21 +2,25 @@
 
 if [ "$1" = "build" ]; then
     # For neovim
-    sudo apt-get install ninja-build gettext cmake unzip curl
-    git clone https://github.com/neovim/neovim
-    cd neovim
-    git switch release-0.9
-    make CMAKE_BUILD_TYPE=RelWithDebInfo # permission error occurs, then use 'sudo'
-    sudo make install
-    cd -
-    rm -rf neovim
+    if [ "$(which nvim)" = "" ]; then
+        sudo apt-get install ninja-build gettext cmake unzip curl
+        git clone https://github.com/neovim/neovim
+        cd neovim
+        git switch release-0.9
+        make CMAKE_BUILD_TYPE=RelWithDebInfo # permission error occurs, then use 'sudo'
+        sudo make install
+        cd -
+        rm -rf neovim
+
+        echo "Build neovim successfully!"
+    fi
     
-    echo "Build neovim successfully!"
-
     # For lunarvim configuration
-    LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+    if [ "$(which lvim)" = "" ]; then
+        LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
-    echo "Install lunarvim successfully!"
+        echo "Install lunarvim successfully!"
+    fi
 elif [ "$1" = "config" ]; then
     if [ -d "$HOME/.config/lvim" ]; then
         if [ -d "$HOME/.config/lvim.old" ]; then
