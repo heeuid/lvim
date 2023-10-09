@@ -23,7 +23,8 @@ vim.cmd([[autocmd BufReadPost *
 vim.cmd([[
 	autocmd FileType c setlocal noexpandtab shiftwidth=8 tabstop=8
 	autocmd FileType make setlocal noexpandtab shiftwidth=8 tabstop=8
-	autocmd BufRead,BufNewFile *.dts, *.dtsi setlocal noexpandtab shiftwidth=8 tabstop=8
+	autocmd BufRead,BufNewFile *.dts setlocal noexpandtab shiftwidth=8 tabstop=8
+	autocmd BufRead,BufNewFile *.dtsi setlocal noexpandtab shiftwidth=8 tabstop=8
 	autocmd BufRead,BufNewFile Kconfig* setlocal noexpandtab shiftwidth=8 tabstop=8
 	autocmd BufRead,BufNewFile *_defconfig setlocal noexpandtab shiftwidth=8 tabstop=8
 ]])
