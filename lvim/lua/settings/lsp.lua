@@ -81,6 +81,20 @@ end
 function M.setup()
     lvim.builtin.cmp.formatting.format = format
 
+    local formatters = require("lvim.lsp.null-ls.formatters")
+    formatters.setup({
+        { name = "black" },
+    })
+
+    local linters = require("lvim.lsp.null-ls.linters")
+    linters.setup({
+        { name = "flake8" },
+        { name = "shellcheck", args = { "--serverity", "warning" } },
+    })
+
+    -- lvim.format_on_save.enabled = true
+    -- lvim.format_on_save.pattern = { "*.lua", "*.py", "*.c", "*.h" }
+
     -- local lspconfig = require("lspconfig")
     -- lspconfig.pyright.setup({})
     -- lspconfig.clangd.setup({})
