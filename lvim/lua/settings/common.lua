@@ -9,7 +9,8 @@ function M.setup()
 
     lvim.builtin.cmp.cmdline.enable = true
 
-    lvim.colorscheme = "catppuccin-latte"
+    lvim.colorscheme = "github_light"
+    -- lvim.colorscheme = "catppuccin-latte"
     --    "catppuccin-latte"
     --    "catppuccin-frappe"
     --    "catppuccin-macchiato"
