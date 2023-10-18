@@ -19,7 +19,9 @@ if [ "$1" = "build" ]; then
     if [ "$(which lvim)" = "" ]; then
         LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
-        echo "Install lunarvim successfully!"
+        if [ $? -eq 0 ]; then
+            echo "Install lunarvim successfully!"
+        fi
     fi
 elif [ "$1" = "config" ]; then
     if [ -d "$HOME/.config/lvim" ]; then
