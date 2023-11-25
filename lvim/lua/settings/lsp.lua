@@ -78,8 +78,20 @@ local format = function(entry, vim_item)
 	return vim_item
 end
 
+local function config_treesitter()
+    lvim.builtin.treesitter.highlight = true
+    lvim.builtin.treesitter.indent = true
+    lvim.builtin.treesitter.ensure_installed = {
+        "c", "rust", "lua", "python",
+        "xml", "json", "yaml", "toml",
+        "t32"
+    }
+end
+
 function M.setup()
 	lvim.builtin.cmp.formatting.format = format
+
+    config_treesitter()
 
 	lvim.lsp.installer.setup.ensure_installed = {
 		"lua_ls",
