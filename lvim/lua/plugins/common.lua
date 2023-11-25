@@ -6,7 +6,7 @@ return {
     },
     { "rcarriga/nvim-notify",},
     { "catppuccin/nvim", name = "catppuccin", priotiry = 1000 },
-    { "projekt0n/github-nvim-theme" },
+    { "projekt0n/github-nvim-theme", config = function() require('github-theme').setup({}) end },
     -- { "dnlhc/glance.nvim",
     --     config = function() require("glance").setup({}) end,
     -- },

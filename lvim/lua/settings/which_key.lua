@@ -28,9 +28,9 @@ local opts = {
             nowait = true,  -- use `nowait` when creating keymaps
         }
     },
-    xmode = {               -- only visual
+    vmode = {               -- only visual
         empty = {
-            mode = "x",     -- NORMAL mode
+            mode = "v",     -- NORMAL mode
             prefix = "",
             buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
             silent = true,  -- use `silent` when creating keymaps
@@ -38,7 +38,7 @@ local opts = {
             nowait = true,  -- use `nowait` when creating keymaps
         },
         space = {
-            mode = "x",     -- NORMAL mode
+            mode = "v",     -- NORMAL mode
             prefix = "<space>",
             buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
             silent = true,  -- use `silent` when creating keymaps
@@ -46,7 +46,7 @@ local opts = {
             nowait = true,  -- use `nowait` when creating keymaps
         },
         backslash = {
-            mode = "x",     -- NORMAL mode
+            mode = "v",     -- NORMAL mode
             prefix = "\\",
             buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
             silent = true,  -- use `silent` when creating keymaps
@@ -134,12 +134,16 @@ function M.setup()
         --       "Show line diagnostics",
         --     },
 
+        lvim.builtin.which_key.vmappings = {}
         lvim.builtin.which_key.mappings = {}
         vim.o.timeoutlen = 80
 
         wk.register({
             ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
-        }, opts.xmode.space)
+            ["w"] = { "<cmd>w!<CR>", "Save" },
+            ["q"] = { "<cmd>confirm q<CR>", "Quit" },
+            ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment toggle linewise (visual)" },
+        }, opts.vmode.space)
 
         wk.register({
             ["<tab>"] = { "<cmd>bn<cr>", "Buffer: Next" },
@@ -157,7 +161,16 @@ function M.setup()
                 ["I"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation" },
                 ["s"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help" },
                 ["l"] = { diagnostic, "Show line diagnostics" },
+                ["R"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+                ["g"] = { "gg", "Goto top line" },
             },
+            ["d"] = {
+                ["d"] = { "dd", "Delete This Line" },
+                ["k"] = { "dk", "Delete his Line + Above Line" },
+                ["j"] = { "dj", "Delete This Line + Below Line" },
+                ["h"] = { "dh", "Delete Left Character(Backspace)" },
+                ["l"] = { "dh", "Delete This Character(Delete)" },
+            }
         }, opts.nmode.empty)
 
         wk.register({ -- for "<sapce>[0-9a-zA-Z]+"
@@ -177,15 +190,16 @@ function M.setup()
             ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
             ["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
             ["r"] = { "<cmd>Telescope live_grep<cr>", "Grep Text" },
-            ["m"] = { "<cmd>Telescope marks<cr>", "Marks" },
+            ["m"] = { "<cmd>Telescope marks<cr>", "Mark List" },
             ["t"] = { "<cmd>Tagbar<cr>", "Tagbar" },
             ["o"] = { "<cmd>Telescope oldfiles<cr>", "Old(Past) Files" },
-            ["b"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
-            ["v"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
+            ["b"] = { "<cmd>Telescope buffers<cr>", "Buffer List" },
+            ["v"] = { "<cmd>Telescope buffers<cr>", "Buffer List" },
             ["8"] = { "<cmd>f<cr>", "Current File Path" },
             ["9"] = { "<cmd>pwd<cr>", "Current Dir Path" },
             ["d"] = { "<cmd>lua vim.cmd('Cscope find g ' .. vim.fn.expand('<cword>'))<cr>", "Cscope Global Def. List" },
             ["s"] = { "<cmd>lua vim.cmd('ts ' .. vim.fn.expand('<cword>'))<cr>", "Tag Select Current Word" },
+            ["D"] = { function() vim.diagnostic.setloclist() end, "Diagnostic setloclist",},
         }, opts.nmode.space)
 
         wk.register({ -- for "\\[0-9a-zA-Z]+"
@@ -249,7 +263,7 @@ function M.setup()
                 U = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle UI" },
             },
             p = {
-                name = "Plugins",
+                name = "Lazy Plugins",
                 i = { "<cmd>Lazy install<cr>", "Install" },
                 s = { "<cmd>Lazy sync<cr>", "Sync" },
                 S = { "<cmd>Lazy clear<cr>", "Status" },
@@ -272,7 +286,7 @@ function M.setup()
                 g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
                 j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
                 k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
-                l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+                l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Git Blame(Who Changed)" },
                 p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
                 r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
                 R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
@@ -281,17 +295,23 @@ function M.setup()
                     "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
                     "Undo Stage Hunk",
                 },
-                o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-                b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-                c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+                o = { "<cmd>Telescope git_status<cr>", "Git Status(Open Changed Files)" },
+                b = { "<cmd>Telescope git_branches<cr>", "Git Checkout Branch" },
+                c = { "<cmd>Telescope git_commits<cr>", "Git Checkout Commit" },
                 C = {
                     "<cmd>Telescope git_bcommits<cr>",
-                    "Checkout commit(for current file)",
+                    "Git Checkout commit(for current file)",
                 },
                 d = {
                     "<cmd>Gitsigns diffthis HEAD<cr>",
                     "Git Diff",
                 },
+            },
+            w = {
+                name = "workspace",
+                a = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>", "Add Workspace" },
+                r = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>", "Remove Workspace" },
+                l = { "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>", "List Workspace" },
             },
             l = {
                 name = "LSP",
@@ -301,11 +321,11 @@ function M.setup()
                 f = { "<cmd>lua require('lvim.lsp.utils').format()<cr>", "Format" },
                 i = { "<cmd>LspInfo<cr>", "Info" },
                 I = { "<cmd>Mason<cr>", "Mason Info" },
-                j = {
+                n = {
                     "<cmd>lua vim.diagnostic.goto_next()<cr>",
                     "Next Diagnostic",
                 },
-                k = {
+                p = {
                     "<cmd>lua vim.diagnostic.goto_prev()<cr>",
                     "Prev Diagnostic",
                 },
@@ -322,7 +342,7 @@ function M.setup()
 					name = "workspace",
 					a = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>", "Add Workspace" },
 					r = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>", "Remove Workspace" },
-					l = { "<cmd>lua vim.lsp.buf.list_workspace_folders()<cr>", "List Workspace" },
+					l = { "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>", "List Workspace" },
 				},
 				D = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type Def." },
 				K = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Explanation" },
