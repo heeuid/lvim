@@ -100,6 +100,16 @@ local diagnostic = function()
     end
 end
 
+local function change_indent(num)
+    vim.opt.tabstop = num
+    vim.opt.shiftwidth = num
+    if num == 8 then
+        vim.opt.expandtab = false
+    else
+        vim.opt.expandtab = true
+    end
+end
+
 function M.setup()
     local ok, wk = pcall(require, "which-key")
     if ok then
@@ -170,7 +180,7 @@ function M.setup()
                 ["j"] = { "dj", "Delete This Line + Below Line" },
                 ["h"] = { "dh", "Delete Left Character(Backspace)" },
                 ["l"] = { "dh", "Delete This Character(Delete)" },
-            }
+            },
         }, opts.nmode.empty)
 
         wk.register({ -- for "<sapce>[0-9a-zA-Z]+"
@@ -203,6 +213,11 @@ function M.setup()
         }, opts.nmode.space)
 
         wk.register({ -- for "\\[0-9a-zA-Z]+"
+            i = {
+                name = "Indentation",
+                ["4"] = {function() change_indent(4) end, "Change Indent into 4"},
+                ["8"] = {function() change_indent(8) end, "Change Indent into 8"},
+            },
             t = { "<cmd>Tagbar<cr>", "Tagbar" },
             e = { "<cmd>NvimTreeToggle<cr>", "NvimTree" },
             c = {
