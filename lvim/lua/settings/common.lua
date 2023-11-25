@@ -1,5 +1,15 @@
 local M = {}
 
+local function config_lastplace()
+   require("nvim-lastplace").setup({
+    lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+    lastplace_ignore_filetype = {
+     "gitcommit", "gitrebase", "svn", "hgcommit",
+    },
+    lastplace_open_folds = true,
+   })
+end
+
 function M.setup()
     lvim.builtin.project.manual_mode = true
 
@@ -8,6 +18,8 @@ function M.setup()
     lvim.builtin.terminal.execs[3][2] = "<space>3"
 
     lvim.builtin.cmp.cmdline.enable = true
+
+    config_lastplace()
 
     -- lvim.colorscheme = "github_light"
     lvim.colorscheme = "catppuccin-latte"

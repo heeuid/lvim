@@ -16,10 +16,10 @@ vim.cmd[[
     autocmd ColorScheme * highlight TypeHint guifg=#306060
     augroup end
 ]]
-vim.cmd([[autocmd BufReadPost *
-  \ if line("'\"") >= 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-   \ endif]])
+-- vim.cmd([[autocmd BufReadPost *
+--   \ if line("'\"") >= 1 && line("'\"") <= line("$") |
+--   \   exe "normal! g`\"" |
+--    \ endif]])
 vim.cmd([[
 	autocmd FileType c setlocal noexpandtab shiftwidth=8 tabstop=8
 	autocmd FileType make setlocal noexpandtab shiftwidth=8 tabstop=8
