@@ -9,11 +9,11 @@ vim.opt.colorcolumn = '80'
 vim.opt.langmap = "ㅁa,ㅠb,ㅊc,ㅇd,ㄷe,ㄹf,ㅎg,ㅗh,ㅑi,ㅓj,ㅏk,ㅣl,ㅡm,ㅜn,ㅐo,ㅔp,ㅂq,ㄱr,ㄴs,ㅅt,ㅕu,ㅍv,ㅈw,ㅌx,ㅛy,ㅋz"
 vim.opt.autochdir = false -- current directory = path where you execute neovim(lvim)
 
-vim.cmd([[autocmd ColorScheme * highlight ColorColumn guibg=#292e42]])
+vim.cmd([[autocmd ColorScheme * highlight ColorColumn guibg=#f0c0c0]])
 vim.cmd[[
     augroup MyColors
     autocmd!
-    autocmd ColorScheme * highlight TypeHint guifg=#306060
+    autocmd ColorScheme * highlight TypeHint guifg=#80c0c0
     augroup end
 ]]
 -- vim.cmd([[autocmd BufReadPost *
