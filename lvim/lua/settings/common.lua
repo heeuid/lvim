@@ -10,6 +10,22 @@ local function config_lastplace()
    })
 end
 
+local function config_colorizer()
+    require("colorizer").setup(
+        {'*';},
+        {
+            RGB = true;
+            RRGGBB = true;
+            names = true;
+            RRGGBBAA = true;
+            rgb_fn = true;
+            hsl_fn = true;
+            css = true;
+            css_fn = true;
+        }
+    )
+end
+
 function M.setup()
     lvim.builtin.project.manual_mode = true
 
@@ -20,6 +36,7 @@ function M.setup()
     lvim.builtin.cmp.cmdline.enable = true
 
     config_lastplace()
+    config_colorizer()
 
     -- lvim.colorscheme = "github_light"
     lvim.colorscheme = "catppuccin-latte"
