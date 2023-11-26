@@ -44,7 +44,7 @@ whose size is thousands MB, it may open slowly. So in that case, use vim.
 M-key == <ALT-key>
 S-key == <SHIFT-key>
 PREFIX == <CTRL-B> (disabled by .tmux.conf)
-PREFIX == M-b
+PREFIX == M-b or C-a
 PREFIX + key
 
 # 1. TMUX
@@ -69,6 +69,7 @@ PREFIX + s (.tmux.conf)
 ## Move to Other Plane
 PREFIX + (Left|Down|Up|Right)
 M-(h|j|k|l) (.tmux.conf)
+M-(H|J|K|L) (.tmux.conf)
 M-(Left|Down|Up|Right) (.tmux.conf)
 
 ## Quit Plane
