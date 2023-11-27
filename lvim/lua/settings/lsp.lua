@@ -83,7 +83,7 @@ local function config_treesitter()
     lvim.builtin.treesitter.indent = true
     lvim.builtin.treesitter.ensure_installed = {
         "c", "rust", "lua", "python",
-        "xml", "json", "yaml", "toml",
+        "json", "yaml", "toml",
         "t32"
     }
 end
