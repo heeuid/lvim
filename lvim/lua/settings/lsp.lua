@@ -78,6 +78,22 @@ local format = function(entry, vim_item)
 	return vim_item
 end
 
+local function autocmd_highlight(lang, patterns)
+    vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = patterns,
+        callback = function()
+            vim.treesitter.start(nil,lang)
+        end,
+    })
+end
+
+local ts_lang_patterns = {
+    {"t32", {"*.cmm"}},
+    {"make", {"Makefile"}},
+    {"toml", {"*.toml"}},
+    {"yaml", {"*.yaml", "*.yml"}},
+}
+
 local function config_treesitter()
     lvim.builtin.treesitter.highlight = true
     lvim.builtin.treesitter.indent = true
@@ -86,6 +102,11 @@ local function config_treesitter()
         "json", "yaml", "toml",
         "t32"
     }
+    for _, v in pairs(ts_lang_patterns) do
+        local lang = v[1]
+        local patterns = v[2]
+        autocmd_highlight(lang, patterns)
+    end
 end
 
 function M.setup()
