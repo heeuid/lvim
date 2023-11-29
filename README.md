@@ -61,10 +61,12 @@ tmux kill-session -t 0
 ## Plane Vertical Split
 PREFIX + %
 PREFIX + v (.tmux.conf)
+PREFIX + | (.tmux.conf)
 
 ## Plane Horizontal Split
 PREFIX + "
 PREFIX + s (.tmux.conf)
+PREFIX + _ (.tmux.conf)
 
 ## Move to Other Plane
 PREFIX + (Left|Down|Up|Right)
@@ -128,4 +130,13 @@ tmux attach-session -t TARGET_SESSION: TARGET_SESSION이라는 이름의 세션�
 ## Show Clock (Time)
 PREFIX + t
 
+## Mode
+### Copy Mode
+PREFIX + [
+### View Mode
+PREFIX + ?
+### Choose Mode
+PREFIX + w
+### Out of Mode
+q
 ```
