@@ -79,7 +79,7 @@ local format = function(entry, vim_item)
 end
 
 local function autocmd_highlight(lang, patterns)
-    vim.api.nvim_create_autocmd("BufEnter", {
+    vim.api.nvim_create_autocmd("BufRead", {
         pattern = patterns,
         callback = function()
             vim.treesitter.start(nil,lang)
