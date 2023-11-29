@@ -56,28 +56,28 @@ tmux
 PREFIX + d (after Detach)
 tmux kill-session -t 0
 
-# 2. PLANE
+# 2. PANE
 
-## Plane Vertical Split
+## Pane Vertical Split
 PREFIX + %
 PREFIX + v (.tmux.conf)
 PREFIX + | (.tmux.conf)
 
-## Plane Horizontal Split
+## Pane Horizontal Split
 PREFIX + "
 PREFIX + s (.tmux.conf)
 PREFIX + _ (.tmux.conf)
 
-## Move to Other Plane
+## Move to Other Pane
 PREFIX + (Left|Down|Up|Right)
 M-(h|j|k|l) (.tmux.conf)
 M-(H|J|K|L) (.tmux.conf)
 M-(Left|Down|Up|Right) (.tmux.conf)
 
-## Quit Plane
+## Quit Pane
 PREIFX + x
 
-## Resize Plane Sizes
+## Resize Pane Sizes
 ### Vertically
 select-layout even-vertical
 PREFIX + M-2
@@ -87,13 +87,13 @@ PREFIX + M-1
 ### Automatically
 PREFIX + <Space>
 
-## Change Positions of Planes
+## Change Positions of Panes
 ### Rotate
 PREFIX + C-o (시계 반대 - anticlockwise)
 PREFIX + M-o (시계 방향 - clockwise)
 ### Swap
-PREFIX + }(S-]) (with right plane)
-PREFIX + {(S-[) (with left plane)
+PREFIX + }(S-]) (with right pane)
+PREFIX + {(S-[) (with left pane)
 
 # 3. WINDOW
 
@@ -107,6 +107,9 @@ S-(Left|Right) (.tmux.conf)
 
 ## Quit Window
 PREFIX + &
+
+## Rename Window Title
+PREFIX + ,
 
 # 4. SESSION
 
