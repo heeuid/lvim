@@ -224,6 +224,7 @@ function M.setup()
 						vim.opt.linebreak = false
 					end
 				end,
+                "Toggle Wrap Attribute"
 			},
 		}, opts.nmode.space)
 
