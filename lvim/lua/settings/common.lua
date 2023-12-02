@@ -38,17 +38,6 @@ function M.setup()
     config_lastplace()
     config_colorizer()
 
-    -- lvim.colorscheme = "github_light"
-    lvim.colorscheme = "catppuccin-latte"
-    --    "catppuccin-latte"
-    --    "catppuccin-frappe"
-    --    "catppuccin-macchiato"
-    --    "catppuccin-mocha"
-    --lvim.colorscheme = "tokyonight-day"
-    --    "tokyonight-storm"
-    --    "tokyonight-night"
-    --    "tokyonight-moon"
-
     -- require("shade").setup({
     --     overlay_opacity = 50,
     --     opacity_setup = 1,

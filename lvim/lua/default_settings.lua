@@ -28,3 +28,15 @@ vim.cmd([[
 	autocmd BufRead,BufNewFile Kconfig* setlocal noexpandtab shiftwidth=8 tabstop=8
 	autocmd BufRead,BufNewFile *_defconfig setlocal noexpandtab shiftwidth=8 tabstop=8
 ]])
+
+-- lvim.colorscheme = "github_light"
+lvim.colorscheme = "catppuccin-latte"
+--    "catppuccin-latte"
+--    "catppuccin-frappe"
+--    "catppuccin-macchiato"
+--    "catppuccin-mocha"
+--lvim.colorscheme = "tokyonight-day"
+--    "tokyonight-storm"
+--    "tokyonight-night"
+--    "tokyonight-moon"
+
