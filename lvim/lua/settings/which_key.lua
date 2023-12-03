@@ -181,6 +181,8 @@ function M.setup()
 				["h"] = { "dh", "Delete Left Character(Backspace)" },
 				["l"] = { "dh", "Delete This Character(Delete)" },
 			},
+            j = { "gj", "go down one line in wrapped lines" },
+            k = { "gk", "go up one line in wrapped lines" },
 		}, opts.nmode.empty)
 
 		wk.register({ -- for "<sapce>[0-9a-zA-Z]+"
