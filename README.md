@@ -68,16 +68,17 @@ PREFIX + "
 PREFIX + s (.tmux.conf)
 PREFIX + _ (.tmux.conf)
 
-## Move to Other Pane
+## Select a Pane
 PREFIX + (Left|Down|Up|Right)
-M-(h|j|k|l) (.tmux.conf)
-M-(H|J|K|L) (.tmux.conf)
-M-(Left|Down|Up|Right) (.tmux.conf)
+M-h|j|k|l (.tmux.conf)
+M-H|J|K|L (.tmux.conf)
+M-Left|Down|Up|Right (.tmux.conf)
 
-## Quit Pane
+## Kill Pane
 PREIFX + x
+M-x (.tmux.conf)
 
-## Resize Pane Sizes
+## Resize & Rerrange Panes
 ### Vertically
 select-layout even-vertical
 PREFIX + M-2
@@ -86,6 +87,9 @@ select-layout even-horizontal
 PREFIX + M-1
 ### Automatically
 PREFIX + <Space>
+### Only Resize
+PREFIX + H|J|K|L (.tmux.conf)
+C-S-Left|Down|Up|Down (.tmux.conf)
 
 ## Change Positions of Panes
 ### Rotate
@@ -97,19 +101,23 @@ PREFIX + {(S-[) (with left pane)
 
 # 3. WINDOW
 
-## Create Another Window
+## Create a Window
 PREFIX + c
+M-c (.tmux.conf)
 
-## Move to Another Window
+## Select a Window
 PREFIX + Number
-PREFIX + (n|p)
-S-(Left|Right) (.tmux.conf)
+PREFIX + n|p
+S-Left|Right (.tmux.conf)
+M-n|p
 
-## Quit Window
+## Kill Window
 PREFIX + &
+M-& (.tmux.conf)
 
 ## Rename Window Title
 PREFIX + ,
+M-, (.tmux.conf)
 
 # 4. SESSION
 
@@ -142,4 +150,7 @@ PREFIX + ?
 PREFIX + w
 ### Out of Mode
 q
+
+## Reload tmux config
+PREFIX + r (.tmux.conf)
 ```
