@@ -44,7 +44,7 @@ whose size is thousands MB, it may open slowly. So in that case, use vim.
 M-key == <ALT-key>
 S-key == <SHIFT-key>
 PREFIX == <CTRL-B> (disabled by .tmux.conf)
-PREFIX == M-b or C-a
+PREFIX == M-b or M-a
 PREFIX + key
 
 # 1. TMUX
