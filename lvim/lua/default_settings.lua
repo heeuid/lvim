@@ -8,6 +8,8 @@ vim.opt.shiftwidth = spaces_for_indent
 vim.opt.colorcolumn = '80'
 vim.opt.langmap = "ㅁa,ㅠb,ㅊc,ㅇd,ㄷe,ㄹf,ㅎg,ㅗh,ㅑi,ㅓj,ㅏk,ㅣl,ㅡm,ㅜn,ㅐo,ㅔp,ㅂq,ㄱr,ㄴs,ㅅt,ㅕu,ㅍv,ㅈw,ㅌx,ㅛy,ㅋz"
 vim.opt.autochdir = false -- current directory = path where you execute neovim(lvim)
+vim.opt.wrap = true
+vim.opt.linebreak = true
 
 vim.cmd([[autocmd ColorScheme * highlight ColorColumn guibg=#f0c0c0]])
 vim.cmd[[
@@ -28,15 +30,3 @@ vim.cmd([[
 	autocmd BufRead,BufNewFile Kconfig* setlocal noexpandtab shiftwidth=8 tabstop=8
 	autocmd BufRead,BufNewFile *_defconfig setlocal noexpandtab shiftwidth=8 tabstop=8
 ]])
-
--- lvim.colorscheme = "github_light"
-lvim.colorscheme = "catppuccin-latte"
---    "catppuccin-latte"
---    "catppuccin-frappe"
---    "catppuccin-macchiato"
---    "catppuccin-mocha"
---lvim.colorscheme = "tokyonight-day"
---    "tokyonight-storm"
---    "tokyonight-night"
---    "tokyonight-moon"
-

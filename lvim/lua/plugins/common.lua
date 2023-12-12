@@ -5,8 +5,15 @@ return {
         config = function() vim.fn["mkdp#util#install"]() end,
     },
     { "rcarriga/nvim-notify", },
-    { "catppuccin/nvim",             name = "catppuccin",                                      priotiry = 1000 },
-    { "projekt0n/github-nvim-theme", config = function() require('github-theme').setup({}) end },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priotiry = 1000
+    },
+    {
+        "projekt0n/github-nvim-theme",
+        config = function() require('github-theme').setup({}) end
+    },
     {
         "ethanholz/nvim-lastplace",
         event = "BufRead",
