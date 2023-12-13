@@ -5,7 +5,8 @@ local merge_plugin_set = function(new_table)
     end
 end
 
+merge_plugin_set(require("plugins.color"))
 merge_plugin_set(require("plugins.common"))
 merge_plugin_set(require("plugins.rust"))
 merge_plugin_set(require("plugins.linux"))
-merge_plugin_set(require("plugins.flutter"))
+--merge_plugin_set(require("plugins.flutter"))

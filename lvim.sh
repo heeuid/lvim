@@ -17,10 +17,19 @@ if [ "$1" = "build" ]; then
     
     # For lunarvim configuration
     if [ "$(which lvim)" = "" ]; then
+        move=0
+        if [ -e "$HOME/.config/lvim" ]; then
+            mv ~/.config/lvim ~/.config/lvim____
+            move=1
+        fi
         LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
         if [ $? -eq 0 ]; then
             echo "Install lunarvim successfully!"
+        fi
+
+        if [ "$move" = "1" ]; then
+            mv  ~/.config/lvim____ ~/.config/lvim
         fi
     fi
 elif [ "$1" = "config" ]; then
