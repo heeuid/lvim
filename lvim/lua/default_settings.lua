@@ -16,12 +16,6 @@ vim.opt.linebreak = true
 --------------
 
 vim.cmd([[autocmd ColorScheme * highlight ColorColumn guibg=#401010]])
-vim.cmd[[
-    augroup MyColors
-    autocmd!
-    autocmd ColorScheme * highlight TypeHint guifg=#80c0c0
-    augroup end
-]]
 -- vim.cmd([[autocmd BufReadPost *
 --   \ if line("'\"") >= 1 && line("'\"") <= line("$") |
 --   \   exe "normal! g`\"" |
