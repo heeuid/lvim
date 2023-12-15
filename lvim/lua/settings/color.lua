@@ -1,23 +1,15 @@
 local M = {}
-
-local function config_colorizer()
-    require("colorizer").setup(
-        {'*';},
-        {
-            RGB = true;
-            RRGGBB = true;
-            names = true;
-            RRGGBBAA = true;
-            rgb_fn = true;
-            hsl_fn = true;
-            css = true;
-            css_fn = true;
-        }
-    )
+local function setup_colorizer()
+    require("colorizer").setup({
+        filetypes = {
+            "*", -- Highlight all files, but customize some others.
+            cmp_docs = { always_update = true },
+        },
+    })
 end
 
 function M.setup()
-    config_colorizer()
+    setup_colorizer()
     lvim.colorscheme = "catppuccin-mocha"
 
     -- lvim.colorscheme = "github_light"

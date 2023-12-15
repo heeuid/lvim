@@ -11,7 +11,11 @@ vim.opt.autochdir = false -- current directory = path where you execute neovim(l
 vim.opt.wrap = true
 vim.opt.linebreak = true
 
-vim.cmd([[autocmd ColorScheme * highlight ColorColumn guibg=#f0c0c0]])
+--------------
+-- Autocmds --
+--------------
+
+vim.cmd([[autocmd ColorScheme * highlight ColorColumn guibg=#401010]])
 vim.cmd[[
     augroup MyColors
     autocmd!
@@ -22,11 +26,45 @@ vim.cmd[[
 --   \ if line("'\"") >= 1 && line("'\"") <= line("$") |
 --   \   exe "normal! g`\"" |
 --    \ endif]])
-vim.cmd([[
-	autocmd FileType c setlocal noexpandtab shiftwidth=8 tabstop=8
-	autocmd FileType make setlocal noexpandtab shiftwidth=8 tabstop=8
-	autocmd BufRead,BufNewFile *.dts setlocal noexpandtab shiftwidth=8 tabstop=8
-	autocmd BufRead,BufNewFile *.dtsi setlocal noexpandtab shiftwidth=8 tabstop=8
-	autocmd BufRead,BufNewFile Kconfig* setlocal noexpandtab shiftwidth=8 tabstop=8
-	autocmd BufRead,BufNewFile *_defconfig setlocal noexpandtab shiftwidth=8 tabstop=8
-]])
+
+-- Filetype
+local filetype_pattern_pairs = {
+  { "t32", "*.cmm" },
+}
+for _, elem in pairs(filetype_pattern_pairs) do
+  local filetype = elem[1]
+  local pattern = elem[2]
+  --vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = pattern,
+    callback = function()
+      vim.bo.filetype = filetype
+    end,
+  })
+end
+
+-- Indentation
+local event_indent_pairs = {
+  { { "FileType" }, { "c", "make" }, 8, false },
+  { { "FileType" }, { "lua" }, 2, true },
+  {
+    { "BufRead", "BufNewFile" },
+    { "*.dts", "*.dtsi", "Kconfig*", "*_defconfig" },
+    8,
+    false,
+  },
+}
+for _, elem in pairs(event_indent_pairs) do
+  local events = elem[1]
+  local patterns = elem[2]
+  local tabspace = elem[3]
+  local tab_expandable = elem[4]
+  vim.api.nvim_create_autocmd(events, {
+    pattern = patterns,
+    callback = function()
+      vim.opt.tabstop = tabspace
+      vim.opt.shiftwidth = tabspace
+      vim.opt.expandtab = tab_expandable
+    end,
+  })
+end

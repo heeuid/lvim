@@ -1,8 +1,8 @@
 return {
     {
         "catppuccin/nvim",
-        name = "catppuccin",
+        --name = "catppuccin",
         priotiry = 1000
     },
-    { 'norcalli/nvim-colorizer.lua', },
+    'NvChad/nvim-colorizer.lua',
 }
