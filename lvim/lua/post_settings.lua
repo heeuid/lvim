@@ -1,8 +1,0 @@
-require("settings.common").setup()
-require("settings.color").setup()
-require("settings.which_key").setup()
-require("settings.lsp").setup()
-require("settings.rust").setup()
-require("settings.nvimtree").setup()
---require("settings.flutter").setup()
---require("settings.linux").setup()

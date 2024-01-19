@@ -1,0 +1,63 @@
+# ~/.config/starship.toml
+
+#format = '''
+#[┌───────────────────>](bold green)
+#[│](bold green)$directory$rust$package
+#[└─>](bold green) '''
+format = '''
+[┌─](bold green)$username[.](bold)$hostname[.](bold)$shell$battery$python
+[│](bold green)$directory
+[└](bold green)$character
+'''
+
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+# Set 'foo' as custom color palette
+palette = 'foo'
+
+[username]
+style_user = 'green bold'
+style_root = 'white bold'
+format = '[$user]($style)'
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+ssh_symbol = '🌏'
+format = '[$hostname](bold fg:#dd6666)[$ssh_symbol](bold blue)'
+trim_at = '.companyname.com'
+disabled = false
+
+[directory]
+format = '[$path]($style)[$read_only]($read_only_style)'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)'
+truncate_to_repo = false
+truncation_length = 16
+truncation_symbol = '.../'
+repo_root_style = 'bg:#cccccc fg:cyan bold'
+
+[shell]
+style = 'yellow bold'
+disabled = false
+
+[battery]
+full_symbol = '🔋 '
+charging_symbol = '⚡️ '
+discharging_symbol = '💀 '
+disabled = false
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+# Define custom colors
+[palettes.foo]
+# Overwrite existing color
+blue = '21'
+# Define new color
+mustard = '#af8700'
